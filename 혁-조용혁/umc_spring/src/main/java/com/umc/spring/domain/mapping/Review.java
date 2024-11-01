@@ -4,6 +4,7 @@ import com.umc.spring.domain.Member;
 import com.umc.spring.domain.Store;
 import com.umc.spring.domain.common.BaseEntity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -28,10 +29,13 @@ public class Review extends BaseEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	private String content;
+	@Column(nullable = true, length = 255)
+	private String contents;
 
+	@Column(nullable = false)
 	private Integer score;
 
+	@Column(nullable = true, columnDefinition = "TEXT")
 	private String imageUrl;
 
 	@ManyToOne(fetch = FetchType.LAZY)

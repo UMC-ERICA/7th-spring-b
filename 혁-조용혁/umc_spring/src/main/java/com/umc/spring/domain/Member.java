@@ -27,13 +27,16 @@ public class Member extends BaseEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(nullable = false, length = 20)
+	@Column(nullable = false, length = 40)
 	private String name;
 
+	@Column(nullable = false, length = 20)
 	private String nickname;
 
+	@Column(nullable = false, length = 15)
 	private String phoneNumber;
 
+	@Column(nullable = false, length = 100)
 	private String address;
 
 	@Enumerated(EnumType.STRING)
@@ -44,10 +47,12 @@ public class Member extends BaseEntity {
 	@Column(columnDefinition = "VARCHAR(15) DEFAULT 'ACTIVE'")
 	private MemberStatus memberStatus;
 
+	@Column(nullable = false)
 	private LocalDate birthday;
 
 	private LocalDate inactiveDate;
 
+	@Column(nullable = false, length = 30)
 	private String email;
 
 	private Integer point;
@@ -62,7 +67,7 @@ public class Member extends BaseEntity {
 	private List<ReviewComment> reviewCommentList = new ArrayList<>();
 
 	@OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-	private List<Alarm> alarmList = new ArrayList<>();
+	private List<PushNotification> pushNotificationList = new ArrayList<>();
 
 	@OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
 	private List<Tag> tagList = new ArrayList<>();

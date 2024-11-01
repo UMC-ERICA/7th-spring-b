@@ -16,11 +16,13 @@ public class ReviewAnswer extends BaseEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@Column(nullable = false, length = 50)
 	private String title;
 
+	@Column(length = 255)
 	private String body;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "alarm_id")
-	private Alarm alarm;
+	@JoinColumn(name = "psuh_id")
+	private PushNotification pushNotification;
 }

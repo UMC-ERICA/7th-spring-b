@@ -21,11 +21,14 @@ public class Terms extends BaseEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@Column(nullable = false, length = 50)
 	private String title;
 
+	@Column(nullable = false, length = 255)
 	private String body;
 
 	@Enumerated(EnumType.STRING)
+	@Column(nullable = false, columnDefinition = "VARCHAR(13) DEFAULT 'NOT_ESSENTIAL'")
 	private TermEssential termEssential;
 
 	@OneToMany(mappedBy = "terms", cascade = CascadeType.ALL)

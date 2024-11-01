@@ -5,6 +5,7 @@ import com.umc.spring.domain.Mission;
 import com.umc.spring.domain.common.BaseEntity;
 import com.umc.spring.domain.enums.MissionType;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -32,6 +33,7 @@ public class MyMission extends BaseEntity {
 	private Long id;
 
 	@Enumerated(EnumType.STRING)
+	@Column(nullable = false, columnDefinition = "VARCHAR(8) DEFAULT 'BEFORE'")
 	private MissionType missionType;
 
 	@ManyToOne(fetch = FetchType.LAZY)

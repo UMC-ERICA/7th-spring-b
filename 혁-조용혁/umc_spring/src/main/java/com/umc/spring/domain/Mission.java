@@ -18,10 +18,13 @@ public class Mission extends BaseEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@Column(nullable = false, length = 50)
 	private String title;
 
+	@Column(nullable = false, length = 255)
 	private String body;
 
+	@Column(nullable = false)
 	private LocalDate deadline;
 
 	@ManyToOne(fetch = FetchType.LAZY)

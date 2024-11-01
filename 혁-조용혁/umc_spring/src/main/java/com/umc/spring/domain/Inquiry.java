@@ -21,13 +21,17 @@ public class Inquiry extends BaseEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@Column(nullable = false, length = 50)
 	private String title;
 
+	@Column(length = 500)
 	private String body;
 
 	@Enumerated(EnumType.STRING)
+	@Column(columnDefinition = "varchar(6)")
 	private InquiryType inquiryType;
 
+	@Column(nullable = false, columnDefinition = "text")
 	private String imageUrl;
 
 	@ManyToOne(fetch = FetchType.LAZY)

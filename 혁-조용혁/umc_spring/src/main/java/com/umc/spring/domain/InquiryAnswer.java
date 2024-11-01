@@ -16,11 +16,13 @@ public class InquiryAnswer extends BaseEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@Column(nullable = false, length = 50)
 	private String title;
 
+	@Column(nullable = false, columnDefinition = "text")
 	private String body;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "alarm_id")
-	private Alarm alarm;
+	@JoinColumn(name = "inquiry_id")
+	private Inquiry inquiry;
 }
