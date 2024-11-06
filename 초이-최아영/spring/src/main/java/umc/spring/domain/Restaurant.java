@@ -26,6 +26,8 @@ public class Restaurant extends BaseEntity {
     @Column(nullable = false, length = 30)
     private String name;
 
+    private Float score;
+
     @Column(nullable = false, length = 20)
     private String region;
 
