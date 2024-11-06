@@ -5,7 +5,6 @@ import lombok.*;
 import umc.spring.domain.base.BaseEntity;
 import umc.spring.domain.enums.Gender;
 import umc.spring.domain.enums.MemberStatus;
-import umc.spring.domain.images.ProfileImageSave;
 import umc.spring.domain.mapping.SelectFoodType;
 import umc.spring.domain.mapping.UserMission;
 
@@ -65,7 +64,7 @@ public class User extends BaseEntity {
     private SocialLogin socialLogin;
     
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<SelectFoodType> foodTypes = new ArrayList<>();
+    private List<SelectFoodType> selectFoodTypes = new ArrayList<>();
     
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Inquiry> inquiries = new ArrayList<>();

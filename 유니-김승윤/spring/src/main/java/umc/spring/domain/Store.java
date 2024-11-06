@@ -3,7 +3,6 @@ package umc.spring.domain;
 import jakarta.persistence.*;
 import lombok.*;
 import umc.spring.domain.base.BaseEntity;
-import umc.spring.domain.images.StoreImageSave;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,5 +38,15 @@ public class Store extends BaseEntity {
     
     @OneToMany(mappedBy = "store", cascade = CascadeType.ALL)
     private List<StoreImageSave> images = new ArrayList<>();
+    
+    @Override
+    public String toString() {
+        return "Store{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", address='" + region + '\'' +
+                ", score=" + rating +
+                '}';
+    }
     
 }

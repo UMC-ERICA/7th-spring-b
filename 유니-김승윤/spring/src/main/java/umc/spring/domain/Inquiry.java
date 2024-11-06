@@ -5,7 +5,6 @@ import lombok.*;
 import umc.spring.domain.base.BaseEntity;
 import umc.spring.domain.enums.InquiryStatus;
 import umc.spring.domain.enums.InquiryType;
-import umc.spring.domain.images.InquiryImageSave;
 
 import java.util.ArrayList;
 import java.util.List;
