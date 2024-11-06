@@ -35,9 +35,10 @@ public class Inquiry extends BaseEntity {
     private InquiryStatus status;
     
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "member_id")
+    private Member member;
     
+    @Builder.Default
     @OneToMany(mappedBy = "inquiry", cascade = CascadeType.ALL)
     private List<InquiryImageSave> images = new ArrayList<>();
 }

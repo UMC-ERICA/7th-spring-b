@@ -2,15 +2,15 @@ package umc.spring.domain.mapping;
 
 import jakarta.persistence.*;
 import lombok.*;
+import umc.spring.domain.Member;
 import umc.spring.domain.Terms;
-import umc.spring.domain.User;
 
 @Entity
 @Getter
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class UserTerms {
+public class MemberTerms {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,8 +19,8 @@ public class UserTerms {
     private boolean agreed;
     
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "member_id")
+    private Member member;
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "terms_id")

@@ -3,7 +3,7 @@ package umc.spring.domain;
 import jakarta.persistence.*;
 import lombok.*;
 import umc.spring.domain.base.BaseEntity;
-import umc.spring.domain.mapping.UserMission;
+import umc.spring.domain.mapping.MemberMission;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +29,7 @@ public class Mission extends BaseEntity {
     @JoinColumn(name = "store_id")
     private Store store;
     
+    @Builder.Default
     @OneToMany(mappedBy = "mission", cascade = CascadeType.ALL)
-    private List<UserMission> userMissions = new ArrayList<>();
+    private List<MemberMission> memberMissions = new ArrayList<>();
 }

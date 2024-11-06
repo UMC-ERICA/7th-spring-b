@@ -2,8 +2,8 @@ package umc.spring.domain.mapping;
 
 import jakarta.persistence.*;
 import lombok.*;
+import umc.spring.domain.Member;
 import umc.spring.domain.Mission;
-import umc.spring.domain.User;
 import umc.spring.domain.base.BaseEntity;
 import umc.spring.domain.enums.MissionStatus;
 
@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class UserMission extends BaseEntity {
+public class MemberMission extends BaseEntity {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,8 +31,8 @@ public class UserMission extends BaseEntity {
     private LocalDateTime deadline;
     
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "member_id")
+    private Member member;
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "mission_id")

@@ -3,7 +3,7 @@ package umc.spring.domain.mapping;
 import jakarta.persistence.*;
 import lombok.*;
 import umc.spring.domain.FoodType;
-import umc.spring.domain.User;
+import umc.spring.domain.Member;
 import umc.spring.domain.base.BaseEntity;
 
 @Entity
@@ -18,8 +18,8 @@ public class SelectFoodType extends BaseEntity {
     private Long id;
     
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "member_id")
+    private Member member;
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "food_type_id")
