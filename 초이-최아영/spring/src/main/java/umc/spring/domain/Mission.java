@@ -30,7 +30,7 @@ public class Mission extends BaseEntity {
     @Column(columnDefinition = "TEXT")
     private String description;
 
-    private Integer score;
+    private Integer point;
 
     private LocalDate deadline;
 

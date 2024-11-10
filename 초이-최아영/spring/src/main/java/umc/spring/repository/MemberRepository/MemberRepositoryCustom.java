@@ -1,9 +1,9 @@
 package umc.spring.repository.MemberRepository;
 
-import umc.spring.domain.Member;
+import umc.spring.web.dto.MemberDto;
 
 import java.util.List;
 
 public interface MemberRepositoryCustom {
-    List<Member> dynamicQueryWithBooleanBuilder(Long memberId);
+    List<MemberDto> findMemberInfoByMemberId(Long memberId);
 }

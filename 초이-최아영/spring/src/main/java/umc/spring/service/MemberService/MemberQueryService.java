@@ -1,11 +1,11 @@
 package umc.spring.service.MemberService;
 
-import umc.spring.domain.Member;
+import umc.spring.web.dto.MemberDto;
 
-import java.util.Optional;
+import java.util.List;
 
 public interface MemberQueryService {
 
-    Optional<Member> findMemberById(Long memberId);
+    List<MemberDto> findMemberInfo(Long memberId);
 
 }

@@ -3,10 +3,10 @@ package umc.spring.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import umc.spring.domain.Member;
 import umc.spring.repository.MemberRepository.MemberRepository;
+import umc.spring.web.dto.MemberDto;
 
-import java.util.Optional;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -17,8 +17,8 @@ public class MemberQueryServiceImpl implements MemberQueryService {
     private final MemberRepository memberRepository;
 
     @Override
-    public Optional<Member> findMemberById(Long memberId) {
-        return memberRepository.findById(memberId);
+    public List<MemberDto> findMemberInfo(Long memberId) {
+        return memberRepository.findMemberInfoByMemberId(memberId);
     }
 
 }

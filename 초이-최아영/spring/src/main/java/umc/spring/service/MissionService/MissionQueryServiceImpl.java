@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import umc.spring.domain.Mission;
 import umc.spring.repository.MissionRepository.MissionRepository;
+import umc.spring.web.dto.MissionStatusDto;
 
 import java.util.List;
 
@@ -16,9 +17,9 @@ public class MissionQueryServiceImpl implements MissionQueryService {
     private final MissionRepository missionRepository;
 
     @Override
-    public List<Mission> findProgressingMissions(Long memberId) {
+    public List<MissionStatusDto> findProgressingMissions(Long memberId) {
 
-        List<Mission> filteredMissions = missionRepository.findProgressingMissionsByMemberId(memberId);
+        List<MissionStatusDto> filteredMissions = missionRepository.findProgressingMissionsByMemberId(memberId);
 
         filteredMissions.forEach(mission -> System.out.println("Mission: " + mission));
 
@@ -26,9 +27,9 @@ public class MissionQueryServiceImpl implements MissionQueryService {
     }
 
     @Override
-    public List<Mission> findCompletedMissions(Long memberId) {
+    public List<MissionStatusDto> findCompletedMissions(Long memberId) {
 
-        List<Mission> filteredMissions = missionRepository.findCompletedMissionsByMemberId(memberId);
+        List<MissionStatusDto> filteredMissions = missionRepository.findCompletedMissionsByMemberId(memberId);
 
         filteredMissions.forEach(mission -> System.out.println("Mission: " + mission));
 

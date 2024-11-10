@@ -1,12 +1,13 @@
 package umc.spring.repository.MemberRepository;
 
 import com.querydsl.core.BooleanBuilder;
+import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import umc.spring.domain.QMember;
-import umc.spring.domain.Member;
+import umc.spring.web.dto.MemberDto;
 
 import java.util.List;
 
@@ -18,7 +19,7 @@ public class MemberRepositoryImpl implements MemberRepositoryCustom {
     private final QMember member = QMember.member;
 
     @Override
-    public List<Member> dynamicQueryWithBooleanBuilder(Long memberId) {
+    public List<MemberDto> findMemberInfoByMemberId(Long memberId) {
         BooleanBuilder predicate = new BooleanBuilder();
 
         if (memberId != null) {
@@ -26,7 +27,13 @@ public class MemberRepositoryImpl implements MemberRepositoryCustom {
         }
 
         return jpaQueryFactory
-                .selectFrom(member)
+                .select(Projections.constructor(MemberDto.class,
+                        member.name,
+                        member.email,
+                        member.phoneNum,
+                        member.point
+                ))
+                .from(member)
                 .where(predicate)
                 .fetch();
     }

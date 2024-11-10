@@ -1,6 +1,7 @@
 package umc.spring.repository.MissionRepository;
 
 import com.querydsl.core.BooleanBuilder;
+import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
@@ -12,6 +13,7 @@ import umc.spring.domain.mapping.QMemberMission;
 import umc.spring.domain.QRestaurant;
 import umc.spring.domain.enums.MissionStatus;
 import umc.spring.domain.Mission;
+import umc.spring.web.dto.MissionStatusDto;
 
 import java.util.List;
 
@@ -27,7 +29,7 @@ public class MissionRepositoryCustomImpl implements MissionRepositoryCustom {
 
 
     @Override
-    public List<Mission> findProgressingMissionsByMemberId(Long memberId) {
+    public List<MissionStatusDto> findProgressingMissionsByMemberId(Long memberId) {
 
         BooleanBuilder predicate = new BooleanBuilder();
 
@@ -38,16 +40,24 @@ public class MissionRepositoryCustomImpl implements MissionRepositoryCustom {
         predicate.and(memberMission.missionStatus.eq(MissionStatus.valueOf("progressing")));
 
         return jpaQueryFactory
-                .select(mission)
+                .select(Projections.constructor(MissionStatusDto.class,
+                    mission.title,
+                    mission.description,
+                    mission.point,
+                    memberMission.missionStatus
+                ))
                 .from(member)
                 .join(memberMission).on(member.id.eq(memberMission.member.id))
                 .join(mission).on(mission.id.eq(memberMission.mission.id))
                 .where(predicate)
+                .orderBy(mission.id.desc())
+                .limit(15)
+                .offset(0)
                 .fetch();
     }
 
     @Override
-    public List<Mission> findCompletedMissionsByMemberId(Long memberId) {
+    public List<MissionStatusDto> findCompletedMissionsByMemberId(Long memberId) {
 
         BooleanBuilder predicate = new BooleanBuilder();
 
@@ -58,11 +68,19 @@ public class MissionRepositoryCustomImpl implements MissionRepositoryCustom {
         predicate.and(memberMission.missionStatus.eq(MissionStatus.valueOf("completed")));
 
         return jpaQueryFactory
-                .select(mission)
+                .select(Projections.constructor(MissionStatusDto.class,
+                        mission.title,
+                        mission.description,
+                        mission.point,
+                        memberMission.missionStatus
+                ))
                 .from(member)
                 .join(memberMission).on(member.id.eq(memberMission.member.id))
                 .join(mission).on(mission.id.eq(memberMission.mission.id))
                 .where(predicate)
+                .orderBy(mission.id.desc())
+                .limit(15)
+                .offset(0)
                 .fetch();
     }
 
@@ -83,6 +101,9 @@ public class MissionRepositoryCustomImpl implements MissionRepositoryCustom {
                 .join(member).on(restaurant.region.eq(member.address))
                 .where(member.id.eq(memberId)
                         .and(predicate))
+                .orderBy(mission.id.desc())
+                .limit(15)
+                .offset(0)
                 .fetch();
     }
 
