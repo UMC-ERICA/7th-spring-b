@@ -1,8 +1,7 @@
-package umc.spring.domain.images;
+package umc.spring.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
-import umc.spring.domain.User;
 import umc.spring.domain.base.BaseEntity;
 
 @Entity
@@ -23,6 +22,6 @@ public class ProfileImageSave extends BaseEntity {
     private String fileName;
     
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "member_id")
+    private Member member;
 }

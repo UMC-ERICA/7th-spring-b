@@ -5,7 +5,6 @@ import lombok.*;
 import umc.spring.domain.base.BaseEntity;
 import umc.spring.domain.enums.InquiryStatus;
 import umc.spring.domain.enums.InquiryType;
-import umc.spring.domain.images.InquiryImageSave;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,9 +35,10 @@ public class Inquiry extends BaseEntity {
     private InquiryStatus status;
     
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "member_id")
+    private Member member;
     
+    @Builder.Default
     @OneToMany(mappedBy = "inquiry", cascade = CascadeType.ALL)
     private List<InquiryImageSave> images = new ArrayList<>();
 }

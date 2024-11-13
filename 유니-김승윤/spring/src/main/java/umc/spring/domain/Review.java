@@ -3,7 +3,6 @@ package umc.spring.domain;
 import jakarta.persistence.*;
 import lombok.*;
 import umc.spring.domain.base.BaseEntity;
-import umc.spring.domain.images.ReviewImageSave;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,13 +25,14 @@ public class Review extends BaseEntity {
     private String content;
     
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "member_id")
+    private Member member;
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "store_id")
     private Store store;
     
+    @Builder.Default
     @OneToMany(mappedBy = "review", cascade = CascadeType.ALL)
     private List<ReviewImageSave> images = new ArrayList<>();
     

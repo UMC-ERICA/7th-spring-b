@@ -1,8 +1,7 @@
-package umc.spring.domain.images;
+package umc.spring.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
-import umc.spring.domain.Inquiry;
 import umc.spring.domain.base.BaseEntity;
 
 @Entity
@@ -10,7 +9,7 @@ import umc.spring.domain.base.BaseEntity;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class InquiryImageSave extends BaseEntity {
+public class StoreImageSave extends BaseEntity {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,6 +22,6 @@ public class InquiryImageSave extends BaseEntity {
     private String fileName;
     
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "inquiry_id")
-    private Inquiry inquiry;
+    @JoinColumn(name = "store_id")
+    private Store store;
 }

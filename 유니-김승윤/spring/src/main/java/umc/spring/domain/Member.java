@@ -5,9 +5,8 @@ import lombok.*;
 import umc.spring.domain.base.BaseEntity;
 import umc.spring.domain.enums.Gender;
 import umc.spring.domain.enums.MemberStatus;
-import umc.spring.domain.images.ProfileImageSave;
+import umc.spring.domain.mapping.MemberMission;
 import umc.spring.domain.mapping.SelectFoodType;
-import umc.spring.domain.mapping.UserMission;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -18,14 +17,14 @@ import java.util.List;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class User extends BaseEntity {
+public class Member extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
     @Column(nullable = false, unique = true, length = 50)
-    private String userid;
+    private String memberid;
     
     @Column(nullable = false, length = 50)
     private String password;
@@ -64,16 +63,20 @@ public class User extends BaseEntity {
     @JoinColumn(name = "social_login_id")
     private SocialLogin socialLogin;
     
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<SelectFoodType> foodTypes = new ArrayList<>();
+    @Builder.Default
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    private List<SelectFoodType> selectFoodTypes = new ArrayList<>();
     
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @Builder.Default
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<Inquiry> inquiries = new ArrayList<>();
     
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<UserMission> userMissions = new ArrayList<>();
+    @Builder.Default
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    private List<MemberMission> memberMissions = new ArrayList<>();
     
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @Builder.Default
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<ProfileImageSave> images = new ArrayList<>();
     
 }

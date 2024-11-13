@@ -1,8 +1,7 @@
-package umc.spring.domain.images;
+package umc.spring.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
-import umc.spring.domain.Review;
 import umc.spring.domain.base.BaseEntity;
 
 @Entity
@@ -10,7 +9,7 @@ import umc.spring.domain.base.BaseEntity;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class ReviewImageSave extends BaseEntity {
+public class InquiryImageSave extends BaseEntity {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,6 +22,6 @@ public class ReviewImageSave extends BaseEntity {
     private String fileName;
     
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "review_id")
-    private Review review;
+    @JoinColumn(name = "inquiry_id")
+    private Inquiry inquiry;
 }
