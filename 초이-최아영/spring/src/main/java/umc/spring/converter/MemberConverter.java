@@ -5,6 +5,7 @@ import umc.spring.domain.enums.Gender;
 import umc.spring.web.dto.MemberRequestDTO;
 import umc.spring.web.dto.MemberResponseDTO;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -20,7 +21,6 @@ public class MemberConverter {
     public static Member toMember(MemberRequestDTO.JoinDto request) {
 
         Gender gender = null;
-
         switch (request.getGender()){
             case 1:
                 gender = Gender.MALE;
@@ -33,9 +33,15 @@ public class MemberConverter {
                 break;
         }
 
+        LocalDate birth = LocalDate.of(
+                request.getBirthYear(),
+                request.getBirthMonth(),
+                request.getBirthDay());
+
         return Member.builder()
                 .name(request.getName())
                 .gender(gender)
+                .birth(birth)
                 .address(request.getAddress())
                 .favCategoryList(new ArrayList<>())
                 .build();
