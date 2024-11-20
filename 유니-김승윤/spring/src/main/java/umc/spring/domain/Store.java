@@ -53,4 +53,7 @@ public class Store extends BaseEntity {
                 '}';
     }
     
+    public void setRegion(Region region) {
+        this.region = region;
+    }
 }
