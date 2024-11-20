@@ -10,7 +10,6 @@ import umc.spring.domain.QStore;
 import umc.spring.domain.enums.MissionStatus;
 import umc.spring.domain.mapping.MemberMission;
 import umc.spring.domain.mapping.QMemberMission;
-import umc.spring.web.dto.MemberDto;
 import umc.spring.web.dto.MemberMissionDto;
 
 import java.util.Arrays;

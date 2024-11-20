@@ -5,7 +5,7 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import umc.spring.domain.QMember;
-import umc.spring.web.dto.MemberDto;
+import umc.spring.web.dto.MemberDTO;
 
 @Repository
 @RequiredArgsConstructor
@@ -15,9 +15,9 @@ public class MemberRepositoryImpl implements MemberRepositoryCustom {
     private final QMember member = QMember.member;
     
     
-    public MemberDto.MemberProfileDto findMemberInfo(Long memberId) {
+    public MemberDTO.MemberProfileDTO findMemberInfo(Long memberId) {
         return jpaQueryFactory
-                .select(Projections.fields(MemberDto.MemberProfileDto.class,
+                .select(Projections.fields(MemberDTO.MemberProfileDTO.class,
                         member.nickname,
                         member.email,
                         member.point
