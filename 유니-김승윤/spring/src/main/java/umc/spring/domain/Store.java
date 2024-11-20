@@ -23,8 +23,9 @@ public class Store extends BaseEntity {
     
     private int rating;
     
-    @Column(nullable = false, length = 50)
-    private String region;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "region_id")
+    private Region region;
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
