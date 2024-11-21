@@ -1,5 +1,6 @@
 package umc.spring.web.controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,7 +18,7 @@ public class ReviewController {
     private final ReviewService reviewService;
     
     @PostMapping("/")
-    public ApiResponse<String> addReview(@RequestBody ReviewDTO.ReviewCreateRequestDTO req) {
+    public ApiResponse<String> addReview(@RequestBody @Valid ReviewDTO.ReviewCreateRequestDTO req) {
         reviewService.createReview(req);
         return ApiResponse.onSuccess("리뷰가 생성되었습니다.");
     }
