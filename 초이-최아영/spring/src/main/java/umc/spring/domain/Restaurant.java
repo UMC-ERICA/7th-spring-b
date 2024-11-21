@@ -44,4 +44,12 @@ public class Restaurant extends BaseEntity {
     @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL)
     private List<Mission> missionList = new ArrayList<>();
 
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public void setRegion(Region region) {
+        this.region = region;
+    }
+
 }
