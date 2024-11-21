@@ -5,7 +5,7 @@ import umc.spring.validation.annotation.StoreExists;
 
 public class MissionDTO {
     
-    public static class createMissionRequestDTO {
+    public static class CreateMissionRequestDTO {
         
         @NotNull
         private int point;
