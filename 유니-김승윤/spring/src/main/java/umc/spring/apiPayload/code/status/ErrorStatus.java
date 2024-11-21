@@ -32,7 +32,9 @@ public enum ErrorStatus implements BaseErrorCode {
     
     REGION_NOT_FOUND(HttpStatus.NOT_FOUND, "REGION4001", "지역을 찾을 수 없습니다."),
     
-    STORE_NOT_FOUND(HttpStatus.NOT_FOUND, "STORE4001", "가계를 찾을 수 없습니다.");
+    STORE_NOT_FOUND(HttpStatus.NOT_FOUND, "STORE4001", "가계를 찾을 수 없습니다."),
+    
+    MISSION_NOT_FOUND(HttpStatus.NOT_FOUND, "MISSION4001", "미션을 찾을 수 없음.");
     
     
     private final HttpStatus httpStatus;
