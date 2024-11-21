@@ -1,6 +1,7 @@
 package umc.spring.web.dto;
 
 import jakarta.validation.constraints.NotNull;
+import lombok.Getter;
 import umc.spring.validation.annotation.MissionNotAssigned;
 
 import java.time.LocalDateTime;
@@ -21,6 +22,7 @@ public class MemberMissionDto {
         private Long currentMissionCount;
     }
     
+    @Getter
     public static class AddMissionToMemberRequestDTO {
         
         @NotNull
