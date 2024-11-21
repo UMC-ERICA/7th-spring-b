@@ -23,13 +23,14 @@ public class Restaurant extends BaseEntity {
     @JoinColumn(name = "category_id")
     private Category category;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "region_id")
+    private Region region;
+
     @Column(nullable = false, length = 30)
     private String name;
 
     private Float score;
-
-    @Column(nullable = false, length = 20)
-    private String region;
 
     @Column(columnDefinition = "TEXT")
     private String imageUrl;
