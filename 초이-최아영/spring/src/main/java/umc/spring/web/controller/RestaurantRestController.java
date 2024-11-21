@@ -10,7 +10,8 @@ import umc.spring.apiPayload.ApiResponse;
 import umc.spring.converter.RestaurantConverter;
 import umc.spring.domain.Restaurant;
 import umc.spring.service.RestaurantService.RestaurantService;
-import umc.spring.web.dto.RestaurantDTO;
+import umc.spring.web.dto.RestaurantRequestDTO;
+import umc.spring.web.dto.RestaurantResponseDTO;
 
 @RestController
 @RequiredArgsConstructor
@@ -20,7 +21,7 @@ public class RestaurantRestController {
     private final RestaurantService restaurantService;
 
     @PostMapping("/")
-    public ApiResponse<RestaurantDTO.CreateResponseDTO> join(@RequestBody @Valid RestaurantDTO.CreateRequestDTO request) {
+    public ApiResponse<RestaurantResponseDTO.CreateResultDTO> join(@RequestBody @Valid RestaurantRequestDTO.CreateDTO request) {
         Restaurant restaurant = restaurantService.createRestaurant(request);
         return ApiResponse.onSuccess(RestaurantConverter.toCreateResponseDTO(restaurant));
     }

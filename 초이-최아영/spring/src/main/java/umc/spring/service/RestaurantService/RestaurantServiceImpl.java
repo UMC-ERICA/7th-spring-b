@@ -13,7 +13,8 @@ import umc.spring.domain.Restaurant;
 import umc.spring.repository.CategoryRepository.CategoryRepository;
 import umc.spring.repository.RegionRepository;
 import umc.spring.repository.RestaurantRepository.RestaurantRepository;
-import umc.spring.web.dto.RestaurantDTO;
+import umc.spring.web.dto.RestaurantRequestDTO;
+import umc.spring.web.dto.RestaurantResponseDTO;
 
 @Service
 @RequiredArgsConstructor
@@ -26,7 +27,7 @@ public class RestaurantServiceImpl implements RestaurantService {
 
     @Override
     @Transactional
-    public Restaurant createRestaurant(RestaurantDTO.CreateRequestDTO request) {
+    public Restaurant createRestaurant(RestaurantRequestDTO.CreateDTO request) {
 
         Restaurant newRestaurant = RestaurantConverter.toRestaurant(request);
 
