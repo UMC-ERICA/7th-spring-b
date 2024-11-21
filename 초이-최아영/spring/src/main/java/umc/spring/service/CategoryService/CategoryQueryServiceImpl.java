@@ -6,6 +6,7 @@ import umc.spring.domain.Category;
 import umc.spring.repository.CategoryRepository.CategoryRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -16,8 +17,12 @@ public class CategoryQueryServiceImpl implements CategoryQueryService {
 
     @Override
     public List<Category> findCategoryList(List<Long> categoryList) {
-
         return categoryRepository.findAllById(categoryList);
+    }
+
+    @Override
+    public Optional<Category> findCategory(Long id) {
+        return categoryRepository.findById(id);
     }
 
 }

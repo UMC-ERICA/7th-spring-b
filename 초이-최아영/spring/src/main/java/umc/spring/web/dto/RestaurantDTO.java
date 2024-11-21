@@ -1,11 +1,11 @@
 package umc.spring.web.dto;
 
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import umc.spring.validation.annotation.ExistCategory;
 import umc.spring.validation.annotation.ExistRegion;
 
 import java.time.LocalDateTime;
@@ -16,7 +16,7 @@ public class RestaurantDTO {
     public static class CreateRequestDTO {
         @NotBlank
         String name;
-        @NotNull
+        @ExistCategory
         Long category;
         @ExistRegion
         Long region;
