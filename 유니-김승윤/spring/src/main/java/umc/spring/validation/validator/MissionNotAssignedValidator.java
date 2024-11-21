@@ -4,14 +4,14 @@ import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import umc.spring.service.missionService.MemberMissionService;
+import umc.spring.service.missionService.MemberMissionServiceImpl;
 import umc.spring.validation.annotation.MissionNotAssigned;
 
 @Component
 @RequiredArgsConstructor
 public class MissionNotAssignedValidator implements ConstraintValidator<MissionNotAssigned, Long> {
 
-    private final MemberMissionService memberMissionService;
+    private final MemberMissionServiceImpl memberMissionService;
 
     @Override
     public boolean isValid(Long missionId, ConstraintValidatorContext context) {

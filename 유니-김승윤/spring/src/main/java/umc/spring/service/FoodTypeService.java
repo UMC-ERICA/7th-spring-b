@@ -1,5 +1,6 @@
 package umc.spring.service;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import umc.spring.domain.FoodType;
@@ -9,6 +10,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class FoodTypeService {
 
     private final FoodTypeRepository foodTypeRepository;
