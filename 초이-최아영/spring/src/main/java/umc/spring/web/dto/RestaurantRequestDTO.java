@@ -1,6 +1,7 @@
 package umc.spring.web.dto;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import umc.spring.validation.annotation.ExistCategory;
 import umc.spring.validation.annotation.ExistRegion;
@@ -16,4 +17,13 @@ public class RestaurantRequestDTO {
         @ExistRegion
         Long region;
     }
+
+    @Getter
+    public static class CreateReviewDTO {
+        @NotBlank
+        String context;
+        @NotNull
+        Float rating;
+    }
+
 }

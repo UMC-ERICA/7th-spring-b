@@ -25,7 +25,7 @@ public class Review extends BaseEntity {
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
 
-    private Integer rating;
+    private Float rating;
 
     private LocalDate date;
 
@@ -34,5 +34,13 @@ public class Review extends BaseEntity {
 
     @Column(columnDefinition = "TEXT")
     private String imageUrl;
+
+    public void setMember(Member member) {
+        this.member = member;
+    }
+
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
+    }
 
 }
