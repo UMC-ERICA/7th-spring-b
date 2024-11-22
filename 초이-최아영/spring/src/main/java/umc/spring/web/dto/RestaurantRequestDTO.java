@@ -6,6 +6,8 @@ import lombok.Getter;
 import umc.spring.validation.annotation.ExistCategory;
 import umc.spring.validation.annotation.ExistRegion;
 
+import java.time.LocalDate;
+
 public class RestaurantRequestDTO {
 
     @Getter
@@ -24,6 +26,18 @@ public class RestaurantRequestDTO {
         String context;
         @NotNull
         Float rating;
+    }
+
+    @Getter
+    public static class CreateMissionDTO {
+        @NotBlank
+        String title;
+        @NotNull
+        String description;
+        @NotNull
+        Integer point;
+        @NotNull
+        LocalDate deadline;
     }
 
 }

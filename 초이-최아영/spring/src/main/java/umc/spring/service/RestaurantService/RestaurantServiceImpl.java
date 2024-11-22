@@ -12,6 +12,7 @@ import umc.spring.converter.RestaurantConverter;
 import umc.spring.domain.*;
 import umc.spring.repository.CategoryRepository.CategoryRepository;
 import umc.spring.repository.MemberRepository.MemberRepository;
+import umc.spring.repository.MissionRepository.MissionRepository;
 import umc.spring.repository.RegionRepository;
 import umc.spring.repository.RestaurantRepository.RestaurantRepository;
 import umc.spring.repository.ReviewRepository;
@@ -29,6 +30,7 @@ public class RestaurantServiceImpl implements RestaurantService {
     private final RegionRepository regionRepository;
     private final ReviewRepository reviewRepository;
     private final MemberRepository memberRepository;
+    private final MissionRepository missionRepository;
 
     @Override
     @Transactional
@@ -62,6 +64,19 @@ public class RestaurantServiceImpl implements RestaurantService {
         newReview.setRestaurant(restaurant);
 
         return reviewRepository.save(newReview);
+    }
+
+    @Override
+    public Mission createMission(Long restaurantId, RestaurantRequestDTO.CreateMissionDTO request) {
+
+        Mission newMission = RestaurantConverter.toMission(request);
+
+        Restaurant restaurant = restaurantRepository.findById(restaurantId)
+                .orElseThrow(() -> new RestaurantHandler(ErrorStatus.RESTAURANT_NOT_FOUND));
+
+        newMission.setRestaurant(restaurant);
+
+        return missionRepository.save(newMission);
     }
 
     @Override
