@@ -32,14 +32,14 @@ public class RestaurantRestController {
     public ApiResponse<RestaurantResponseDTO.CreateReviewResultDTO> createReview(@RequestBody @Valid RestaurantRequestDTO.CreateReviewDTO request,
                                                                                  @ExistRestaurant @PathVariable(name = "restaurant-id") Long restaurantId) {
         Review review = restaurantService.createReview(1L, restaurantId, request);
-        return ApiResponse.onSuccess(RestaurantConverter.toReviewResult(review));
+        return ApiResponse.onSuccess(RestaurantConverter.toCreateReviewResult(review));
     }
 
     @PostMapping("{restaurant-id}/missions")
     public ApiResponse<RestaurantResponseDTO.CreateMissionResultDTO> createMission(@RequestBody @Valid RestaurantRequestDTO.CreateMissionDTO request,
                                                                                    @ExistRestaurant @PathVariable(name = "restaurant-id") Long restaurantId) {
         Mission mission = restaurantService.createMission(restaurantId, request);
-        return ApiResponse.onSuccess(RestaurantConverter.toMissionResult(mission));
+        return ApiResponse.onSuccess(RestaurantConverter.toCreateMissionResult(mission));
     }
 
 }

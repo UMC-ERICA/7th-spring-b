@@ -33,7 +33,7 @@ public class RestaurantConverter {
                 .build();
     }
 
-    public static RestaurantResponseDTO.CreateReviewResultDTO toReviewResult(Review review) {
+    public static RestaurantResponseDTO.CreateReviewResultDTO toCreateReviewResult(Review review) {
         return RestaurantResponseDTO.CreateReviewResultDTO.builder()
                 .reviewId(review.getId())
                 .createdAt(LocalDateTime.now())
@@ -50,7 +50,7 @@ public class RestaurantConverter {
                 .build();
     }
 
-    public static RestaurantResponseDTO.CreateMissionResultDTO toMissionResult(Mission mission) {
+    public static RestaurantResponseDTO.CreateMissionResultDTO toCreateMissionResult(Mission mission) {
         return RestaurantResponseDTO.CreateMissionResultDTO.builder()
                 .missionId(mission.getId())
                 .createdAt(LocalDateTime.now())
