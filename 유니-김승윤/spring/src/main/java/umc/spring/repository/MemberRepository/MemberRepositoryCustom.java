@@ -1,8 +1,8 @@
 package umc.spring.repository.MemberRepository;
 
-import umc.spring.web.dto.MemberDto;
+import umc.spring.web.dto.MemberDTO;
 
 public interface MemberRepositoryCustom {
     
-    MemberDto.MemberProfileDto findMemberInfo(Long memberId);
+    MemberDTO.MemberProfileDTO findMemberInfo(Long memberId);
 }
