@@ -51,7 +51,7 @@ public class RestaurantRestController {
         return ApiResponse.onSuccess(RestaurantConverter.toCreateMissionResult(mission));
     }
 
-    @GetMapping("{restaurant-id}/missions")
+    @GetMapping("{restaurant-id}/reviews")
     @Operation(summary = "특정 가게의 리뷰 목록 조회 API", description = "특정 가게의 리뷰들의 목록을 조회하는 API이며, 페이징을 포함합니다. Query String 으로 page 번호를 주세요")
     @ApiResponses({
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "COMMON200", description = "OK, 성공"),
