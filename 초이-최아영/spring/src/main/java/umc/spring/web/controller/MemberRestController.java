@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import umc.spring.apiPayload.ApiResponse;
 import umc.spring.converter.MemberConverter;
@@ -17,6 +18,7 @@ import umc.spring.domain.Review;
 import umc.spring.domain.mapping.MemberMission;
 import umc.spring.service.MemberService.MemberCommandService;
 import umc.spring.service.MemberService.MemberQueryService;
+import umc.spring.validation.annotation.CheckPage;
 import umc.spring.validation.annotation.ExistMember;
 import umc.spring.web.dto.MemberRequestDTO;
 import umc.spring.web.dto.MemberResponseDTO;
@@ -24,6 +26,7 @@ import umc.spring.web.dto.MemberResponseDTO;
 
 @RestController
 @RequiredArgsConstructor
+@Validated
 @RequestMapping("/members")
 public class MemberRestController {
 
@@ -54,7 +57,9 @@ public class MemberRestController {
             @Parameter(name = "member-id", description = "유저의 아이디, path variable 입니다."),
             @Parameter(name = "page", description = "페이지 번호, query string 입니다.")
     })
-    public ApiResponse<MemberResponseDTO.MyReviewListDTO> getReviewList(@ExistMember @PathVariable(name = "member-id") Long memberId, @RequestParam(name = "page") Integer page) {
+    public ApiResponse<MemberResponseDTO.MyReviewListDTO> getReviewList(@ExistMember @PathVariable(name = "member-id") Long memberId,
+                                                                        @CheckPage @RequestParam(name = "page") Integer page) {
+        page -= 1;
         Page<Review> reviewList = memberQueryService.getReviewList(memberId, page);
         return ApiResponse.onSuccess(MemberConverter.toMyReviewListDTO(reviewList));
     }
