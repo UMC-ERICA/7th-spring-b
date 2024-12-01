@@ -95,4 +95,27 @@ public class MemberConverter {
                 .build();
     }
 
+    public static MemberResponseDTO.MyMissionDTO toMyMissionDTO(Mission mission) {
+        return MemberResponseDTO.MyMissionDTO.builder()
+                .restaurantName(mission.getRestaurant().getName())
+                .title(mission.getTitle())
+                .description(mission.getDescription())
+                .point(mission.getPoint())
+                .deadline(mission.getDeadline())
+                .build();
+    }
+    public static MemberResponseDTO.MyMissionListDTO toMyMissionListDTO(Page<Mission> missionList) {
+
+        List<MemberResponseDTO.MyMissionDTO> missionDTOList = missionList.stream()
+                .map(MemberConverter::toMyMissionDTO).collect(Collectors.toList());
+
+        return MemberResponseDTO.MyMissionListDTO.builder()
+                .isFirst(missionList.isFirst())
+                .isLast(missionList.isLast())
+                .totalPages(missionList.getTotalPages())
+                .totalElements(missionList.getTotalElements())
+                .listSize(missionDTOList.size())
+                .missionList(missionDTOList)
+                .build();
+    }
 }

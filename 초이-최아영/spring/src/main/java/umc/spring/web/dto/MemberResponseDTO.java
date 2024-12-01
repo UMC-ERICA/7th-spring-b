@@ -53,4 +53,29 @@ public class MemberResponseDTO {
         Boolean isLast;
     }
 
+    @Builder
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class MyMissionDTO {
+        String restaurantName;
+        String title;
+        String description;
+        Integer point;
+        LocalDate deadline;
+    }
+
+    @Builder
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class MyMissionListDTO {
+        List<MemberResponseDTO.MyMissionDTO> missionList;
+        Integer listSize;
+        Integer totalPages;
+        Long totalElements;
+        Boolean isFirst;
+        Boolean isLast;
+    }
+
 }
