@@ -62,5 +62,30 @@ public class RestaurantResponseDTO {
         Boolean isLast;
     }
 
+    @Builder
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class MissionDTO {
+        String restaurantName;
+        String title;
+        String description;
+        Integer point;
+        LocalDate deadline;
+    }
+
+    @Builder
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class MissionListDTO {
+        List<RestaurantResponseDTO.MissionDTO> missionList;
+        Integer listSize;
+        Integer totalPages;
+        Long totalElements;
+        Boolean isFirst;
+        Boolean isLast;
+    }
+
 }
 

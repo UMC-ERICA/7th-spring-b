@@ -81,4 +81,29 @@ public class RestaurantConverter {
                 .build();
     }
 
+
+    public static RestaurantResponseDTO.MissionDTO toMissionDTO(Mission mission) {
+        return RestaurantResponseDTO.MissionDTO.builder()
+                .restaurantName(mission.getRestaurant().getName())
+                .title(mission.getTitle())
+                .description(mission.getDescription())
+                .point(mission.getPoint())
+                .deadline(mission.getDeadline())
+                .build();
+    }
+    public static RestaurantResponseDTO.MissionListDTO toMissionListDTO(Page<Mission> missionList) {
+
+        List<RestaurantResponseDTO.MissionDTO> missionDTOList = missionList.stream()
+                .map(RestaurantConverter::toMissionDTO).collect(Collectors.toList());
+
+        return RestaurantResponseDTO.MissionListDTO.builder()
+                .isFirst(missionList.isFirst())
+                .isLast(missionList.isLast())
+                .totalPages(missionList.getTotalPages())
+                .totalElements(missionList.getTotalElements())
+                .listSize(missionDTOList.size())
+                .missionList(missionDTOList)
+                .build();
+    }
+
 }
