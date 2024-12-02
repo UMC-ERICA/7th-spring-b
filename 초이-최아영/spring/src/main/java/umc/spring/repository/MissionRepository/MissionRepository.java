@@ -11,5 +11,4 @@ import java.util.List;
 public interface MissionRepository extends JpaRepository<Mission, Long>, MissionRepositoryCustom {
 
     Page<Mission> findAllByRestaurant(Restaurant restaurant, PageRequest pageRequest);
-    Page<Mission> findByIdIn(List<Long> idList, PageRequest pageRequest);
 }
