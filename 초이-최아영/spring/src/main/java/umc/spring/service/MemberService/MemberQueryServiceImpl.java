@@ -57,4 +57,15 @@ public class MemberQueryServiceImpl implements MemberQueryService {
         return missionPage;
     }
 
+    @Override
+    public Page<Mission> getCompletedMissionList(Long memberId, Integer page) {
+
+        Member member = memberRepository.findById(memberId).get();
+
+        Page<Mission> missionPage = memberMissionRepository.findMissionsByMemberAndStatus(
+                member, MissionStatus.COMPLETED, PageRequest.of(page, 10));
+
+        return missionPage;
+    }
+
 }

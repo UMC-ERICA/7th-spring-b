@@ -83,5 +83,22 @@ public class MemberRestController {
         return ApiResponse.onSuccess(MemberConverter.toMyMissionListDTO(missionList));
     }
 
+    @GetMapping("{member-id}/missions/completed")
+    @Operation(summary = "내가 완료한 미션 목록 조회 API", description = "내가 완료한 미션 목록을 조회하는 API이며, 페이징을 포함합니다.")
+    @ApiResponses({
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "COMMON200", description = "OK, 성공"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "MEMBER4001", description = "사용자가 없습니다.",content = @Content(schema = @Schema(implementation = ApiResponse.class))),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "PAGE4001", description = "잘못된 페이지 요청입니다.",content = @Content(schema = @Schema(implementation = ApiResponse.class))),
+    })
+    @Parameters({
+            @Parameter(name = "member-id", description = "유저의 아이디, path variable 입니다."),
+            @Parameter(name = "page", description = "페이지 번호, query string 입니다.")
+    })
+    public ApiResponse<MemberResponseDTO.MyMissionListDTO> getCompletedMissionList(@ExistMember @PathVariable(name = "member-id") Long memberId,
+                                                                                   @CheckPage @RequestParam(name = "page") Integer page) {
+        page -= 1;
+        Page<Mission> missionList = memberQueryService.getCompletedMissionList(memberId, page);
+        return ApiResponse.onSuccess(MemberConverter.toMyMissionListDTO(missionList));
+    }
 
 }
