@@ -46,4 +46,26 @@ public class StoreResponseDTO {
         String ownerNickname;
         LocalDate createdAt;
     }
+    
+    @Builder
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class StoreMissionListDTO {
+        List<StoreMissionDTO> missionList;
+        Integer listSize;
+        Integer totalPage;
+        Long totalElements;
+        Boolean isFirst;
+        Boolean isLast;
+    }
+    
+    @Builder
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class StoreMissionDTO {
+        private int point;
+        private String missionPrice;
+    }
 }

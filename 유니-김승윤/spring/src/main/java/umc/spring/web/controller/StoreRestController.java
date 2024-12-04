@@ -13,7 +13,9 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import umc.spring.apiPayload.ApiResponse;
 import umc.spring.converter.StoreConverter;
+import umc.spring.domain.Mission;
 import umc.spring.domain.Review;
+import umc.spring.service.storeService.StoreQueryService;
 import umc.spring.service.storeService.StoreService;
 import umc.spring.validation.annotation.CheckPage;
 import umc.spring.validation.annotation.StoreExists;
@@ -25,6 +27,7 @@ import umc.spring.web.dto.StoreResponseDTO;
 @RequestMapping("/stores")
 public class StoreRestController {
     private final StoreService storeService;
+    private final StoreQueryService storeQueryService;
     
     @PostMapping("/regions")
     public ApiResponse<String> addRegionToStore(@RequestBody @Valid StoreResponseDTO.StoreToRegion req) {
@@ -46,5 +49,18 @@ public class StoreRestController {
     public ApiResponse<StoreResponseDTO.ReviewPreViewListDTO> getReviewList(@StoreExists @PathVariable(name = "storeId") Long storeId, @CheckPage @RequestParam(name = "page") Integer page){
         Page<Review> reviewList = storeService.getReviewList(storeId, page - 1);
         return ApiResponse.onSuccess(StoreConverter.reviewPreViewListDTO(reviewList));
+    }
+    
+    @GetMapping("/{storeId}/missions")
+    @Operation(summary = "특정 가게의 미션 목록 조회 API", description = "특정 가게의 미션들의 목록을 조회하는 API이며, 페이징을 포함합니다. query String 으로 page 번호를 주세요")
+    @ApiResponses({
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "COMMON200", description = "OK, 성공"),
+    })
+    @Parameters({
+            @Parameter(name = "storeId", description = "가게의 아이디, path variable 입니다!")
+    })
+    public ApiResponse<StoreResponseDTO.StoreMissionListDTO> getMissionList(@StoreExists @PathVariable(name = "storeId") Long storeId, @CheckPage @RequestParam Integer page) {
+        Page<Mission> missions = storeQueryService.findMissionsByStore(storeId, page - 1);
+        return ApiResponse.onSuccess(StoreConverter.missionListDTO(missions));
     }
 }
