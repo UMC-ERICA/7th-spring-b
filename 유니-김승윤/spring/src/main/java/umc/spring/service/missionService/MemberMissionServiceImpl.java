@@ -1,5 +1,7 @@
 package umc.spring.service.missionService;
 
+import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -55,5 +57,18 @@ public class MemberMissionServiceImpl implements MemberMissionService {
                 missionStatus,
                 PageRequest.of(page, 10)
         );
+    }
+    
+    
+    @Transactional
+    public void completeMission(Long memberMissionId) {
+        MemberMission memberMission = memberMissionRepository.findById(memberMissionId)
+                .orElseThrow(() -> new EntityNotFoundException("MemberMission not found with id: " + memberMissionId));
+        
+        if (memberMission.getStatus() != MissionStatus.ACTIVE) {
+            throw new IllegalStateException("Only ACTIVE missions can be completed.");
+        }
+        
+        memberMission.setStatus(MissionStatus.COMPLETED);
     }
 }

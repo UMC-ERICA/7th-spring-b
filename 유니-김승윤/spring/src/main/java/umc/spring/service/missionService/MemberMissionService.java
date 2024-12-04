@@ -11,4 +11,6 @@ public interface MemberMissionService {
     void addMissionToMember(MemberMissionDto.AddMissionToMemberRequestDTO req);
     
     Page<MemberMission> findMissionsByMember(Long memberId, String status, Integer page);
+    
+    void completeMission(Long memberMissionId);
 }
