@@ -1,6 +1,10 @@
 package umc.spring.service.missionService;
 
+import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import umc.spring.apiPayload.code.status.ErrorStatus;
 import umc.spring.apiPayload.exception.handler.MemberHandler;
@@ -8,6 +12,7 @@ import umc.spring.apiPayload.exception.handler.MissionHandler;
 import umc.spring.converter.MemberMissionConverter;
 import umc.spring.domain.Member;
 import umc.spring.domain.Mission;
+import umc.spring.domain.enums.MissionStatus;
 import umc.spring.domain.mapping.MemberMission;
 import umc.spring.repository.MemberMissionRepository.MemberMissionRepository;
 import umc.spring.repository.MemberRepository.MemberRepository;
@@ -40,5 +45,30 @@ public class MemberMissionServiceImpl implements MemberMissionService {
         MemberMission newMemberMission = MemberMissionConverter.toMemberMission(findMember,findMission);
         
         memberMissionRepository.save(newMemberMission);
+    }
+    
+    @Override
+    public Page<MemberMission> findMissionsByMember(Long memberId, String status, Integer page) {
+        Member member = memberRepository.findById(memberId).get();
+        MissionStatus missionStatus = MissionStatus.valueOf(status);
+        
+        return memberMissionRepository.findAllByMemberAndStatus(
+                member,
+                missionStatus,
+                PageRequest.of(page, 10)
+        );
+    }
+    
+    
+    @Transactional
+    public void completeMission(Long memberMissionId) {
+        MemberMission memberMission = memberMissionRepository.findById(memberMissionId)
+                .orElseThrow(() -> new EntityNotFoundException("MemberMission not found with id: " + memberMissionId));
+        
+        if (memberMission.getStatus() != MissionStatus.ACTIVE) {
+            throw new IllegalStateException("Only ACTIVE missions can be completed.");
+        }
+        
+        memberMission.setStatus(MissionStatus.COMPLETED);
     }
 }

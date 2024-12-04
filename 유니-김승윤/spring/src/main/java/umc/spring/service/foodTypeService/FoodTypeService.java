@@ -1,4 +1,4 @@
-package umc.spring.service;
+package umc.spring.service.foodTypeService;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
