@@ -15,7 +15,9 @@ import umc.spring.converter.MemberConverter;
 import umc.spring.converter.ReviewConverter;
 import umc.spring.domain.Member;
 import umc.spring.domain.Review;
+import umc.spring.domain.mapping.MemberMission;
 import umc.spring.service.memberService.MemberCommandService;
+import umc.spring.service.missionService.MemberMissionService;
 import umc.spring.service.reviewService.ReviewService;
 import umc.spring.validation.annotation.CheckPage;
 import umc.spring.web.dto.MemberDTO;
@@ -28,6 +30,7 @@ public class MemberRestController {
     
     private final MemberCommandService memberCommandService;
     private final ReviewService reviewService;
+    private final MemberMissionService memberMissionService;
     
     @PostMapping("/")
     public ApiResponse<MemberDTO.JoinResultDTO> join(@RequestBody @Valid MemberDTO.memberJoinDTO request){
@@ -50,5 +53,22 @@ public class MemberRestController {
                                                                       @CheckPage @RequestParam Integer page) {
         Page<Review> reviewList = reviewService.getReviews(memberId, page - 1);
         return ApiResponse.onSuccess(ReviewConverter.toMyReviewListDTO(reviewList));
+    }
+    
+    @GetMapping("/{memberId}/missions")
+    @Operation(summary = "진행 중인 미션 목록 조회 API", description = "특정 회원이 진행 중인 미션 목록을 페이징 포함하여 조회하는 API입니다.")
+    @ApiResponses({
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "COMMON200", description = "OK, 성공"),
+    })
+    @Parameters({
+            @Parameter(name = "memberId", description = "회원의 아이디, path variable 입니다!")
+    })
+    public ApiResponse<MemberDTO.MemberMissionListDTO> getMemberMissionList(
+            @PathVariable(name = "memberId") Long memberId,
+            @RequestParam(defaultValue = "ACTIVE") String status,
+            @CheckPage @RequestParam Integer page) {
+        
+        Page<MemberMission> memberMissions = memberMissionService.findMissionsByMember(memberId, status, page - 1);
+        return ApiResponse.onSuccess(MemberConverter.toMemberMissionListDTO(memberMissions));
     }
 }

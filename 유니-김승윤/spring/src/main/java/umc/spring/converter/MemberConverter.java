@@ -1,8 +1,11 @@
 package umc.spring.converter;
 
+import org.springframework.data.domain.Page;
 import umc.spring.domain.FoodType;
 import umc.spring.domain.Member;
+import umc.spring.domain.Mission;
 import umc.spring.domain.enums.Gender;
+import umc.spring.domain.mapping.MemberMission;
 import umc.spring.domain.mapping.SelectFoodType;
 import umc.spring.web.dto.MemberDTO;
 
@@ -52,5 +55,32 @@ public class MemberConverter {
                                 .foodType(foodType)
                                 .build()
                 ).collect(Collectors.toList());
+    }
+    
+    public static MemberDTO.MemberMissionListDTO toMemberMissionListDTO(Page<MemberMission> memberMissionList) {
+        List<MemberDTO.MemberMissionDTO> missionDTOList = memberMissionList.stream()
+                .map(MemberConverter::toMemberMissionDTO)
+                .collect(Collectors.toList());
+        
+        return MemberDTO.MemberMissionListDTO.builder()
+                .isLast(memberMissionList.isLast())
+                .isFirst(memberMissionList.isFirst())
+                .missionList(missionDTOList)
+                .listSize(missionDTOList.size())
+                .totalElements(memberMissionList.getTotalElements())
+                .totalPage(memberMissionList.getTotalPages())
+                .build();
+    }
+    
+    public static MemberDTO.MemberMissionDTO toMemberMissionDTO(MemberMission memberMission) {
+        Mission mission = memberMission.getMission();
+        
+        return MemberDTO.MemberMissionDTO.builder()
+                .uuid(memberMission.getUuid())
+                .status(memberMission.getStatus().toString())
+                .deadline(memberMission.getDeadline())
+                .missionPrice(mission.getMissionPrice())
+                .point(mission.getPoint())
+                .build();
     }
 }

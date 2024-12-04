@@ -47,4 +47,29 @@ public class MemberDTO {
         private String email;
         private Integer point;
     }
+    
+    @Builder
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class MemberMissionListDTO {
+        private List<MemberMissionDTO> missionList;
+        private Integer listSize;
+        private Integer totalPage;
+        private Long totalElements;
+        private Boolean isFirst;
+        private Boolean isLast;
+    }
+    
+    @Builder
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class MemberMissionDTO {
+        private String uuid;
+        private String status;
+        private LocalDateTime deadline;
+        private String missionPrice;
+        private int point;
+    }
 }
