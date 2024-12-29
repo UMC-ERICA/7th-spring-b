@@ -1,4 +1,4 @@
-package umc.spring.service;
+package umc.spring.service.tempService;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

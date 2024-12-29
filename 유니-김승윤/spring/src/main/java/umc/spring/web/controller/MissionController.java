@@ -1,11 +1,12 @@
 package umc.spring.web.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.Parameters;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import umc.spring.apiPayload.ApiResponse;
 import umc.spring.domain.Mission;
 import umc.spring.domain.mapping.MemberMission;
@@ -34,5 +35,20 @@ public class MissionController {
         memberMissionService.addMissionToMember(req);
         
         return ApiResponse.onSuccess("미션 도전하기 추가 완료");
+    }
+    
+    @PatchMapping("/{memberMissionId}/complete")
+    @Operation(summary = "미션 진행 완료 API", description = "진행 중인 미션을 완료 상태로 변경합니다.")
+    @ApiResponses({
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "COMMON200", description = "OK, 성공"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "COMMON404", description = "NOT FOUND, 엔티티를 찾을 수 없음"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "COMMON400", description = "BAD REQUEST, 잘못된 요청")
+    })
+    @Parameters({
+            @Parameter(name = "memberMissionId", description = "회원 미션의 ID")
+    })
+    public ApiResponse<String> completeMission(@PathVariable Long memberMissionId) {
+        memberMissionService.completeMission(memberMissionId);
+        return ApiResponse.onSuccess("미션 성공");
     }
 }
