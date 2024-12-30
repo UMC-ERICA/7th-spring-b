@@ -3,6 +3,7 @@ package umc.spring.web.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import umc.spring.web.dto.MemberDTO;
 
 @Controller
 public class MemberViewController {
@@ -14,7 +15,7 @@ public class MemberViewController {
 
     @GetMapping("/signup")
     public String signupPage(Model model) {
-        model.addAttribute("memberJoinDto", new MemberRequestDTO.JoinDto());
+        model.addAttribute("memberJoinDto", new MemberDTO.memberJoinDTO());
         return "signup";
     }
 
