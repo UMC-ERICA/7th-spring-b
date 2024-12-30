@@ -9,6 +9,7 @@ import umc.spring.domain.mapping.MemberMission;
 import umc.spring.domain.mapping.SelectFoodType;
 import umc.spring.web.dto.MemberDTO;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +43,8 @@ public class MemberConverter {
                 .email(request.getEmail())
                 .role(request.getRole())
                 .gender(gender)
-                .birthday(request.getBirthday())
+                .phone(request.getPhone())
+                .birthday(LocalDate.of(request.getBirthYear(), request.getBirthMonth(), request.getBirthDay()))
                 .name(request.getName())
                 .selectFoodTypes(new ArrayList<>())
                 .phone(request.getPhone())

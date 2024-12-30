@@ -24,9 +24,15 @@ public class MemberDTO {
         @NotNull
         private Integer gender;
         @NotNull
-        private LocalDate birthday;
+        private Integer birthYear;
+        @NotNull
+        private Integer birthMonth;
+        @NotNull
+        private Integer birthDay;
         @Size(min = 5, max = 12)
         private String address;
+        @Size(min = 5, max = 12)
+        String specAddress;
         private String phone;
         @Email
         private String email;
