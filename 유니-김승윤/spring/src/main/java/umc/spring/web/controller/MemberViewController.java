@@ -16,12 +16,6 @@ public class MemberViewController {
     
     private final MemberCommandService memberCommandService;
     
-    
-    @GetMapping("/login")
-    public String loginPage() {
-        return "login";
-    }
-
     @PostMapping("/members/signup")
     public String joinMember(@ModelAttribute("memberJoinDto") MemberDTO.memberJoinDTO request,
                              BindingResult bindingResult,
@@ -37,6 +31,17 @@ public class MemberViewController {
             model.addAttribute("error", e.getMessage());
             return "signup";
         }
+    }
+    
+    @GetMapping("/login")
+    public String loginPage() {
+        return "login";
+    }
+    
+    @GetMapping("/signup")
+    public String signupPage(Model model) {
+        model.addAttribute("memberJoinDto", new MemberDTO.memberJoinDTO());
+        return "signup";
     }
 
     @GetMapping("/home")
