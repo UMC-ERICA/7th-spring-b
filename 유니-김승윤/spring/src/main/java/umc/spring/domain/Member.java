@@ -8,6 +8,7 @@ import org.hibernate.annotations.DynamicUpdate;
 import umc.spring.domain.base.BaseEntity;
 import umc.spring.domain.enums.Gender;
 import umc.spring.domain.enums.MemberStatus;
+import umc.spring.domain.enums.Role;
 import umc.spring.domain.mapping.MemberMission;
 import umc.spring.domain.mapping.SelectFoodType;
 
@@ -28,8 +29,11 @@ public class Member extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @Column(nullable = false, length = 50)
+    @Column(nullable = false)
     private String password;
+    
+    @Enumerated(EnumType.STRING)
+    private Role role;
     
     @Column(nullable = false, length = 10)
     private String name;
@@ -82,4 +86,7 @@ public class Member extends BaseEntity {
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<ProfileImageSave> images = new ArrayList<>();
     
+    public void encodePassword(String password) {
+        this.password = password;
+    }
 }
