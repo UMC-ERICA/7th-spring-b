@@ -51,15 +51,16 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
     private Member saveOrUpdateUser(String email, String nickname) {
         Member member = memberRepository.findByEmail(email)
-            .orElse(Member.builder()
-                .email(email)
-                .name(nickname)
-                .password(passwordEncoder.encode("OAUTH_USER_" + UUID.randomUUID()))
-                .gender(Gender.MALE)  // 기본값 설정
-                .address("소셜로그인")  // 기본값 설정
-                .birthday(LocalDate.now())
-                .role(Role.USER)
-                .build());
+                .orElse(Member.builder()
+                        .email(email)
+                        .name(nickname)
+                        .password(passwordEncoder.encode("OAUTH_USER_" + UUID.randomUUID()))
+                        .gender(Gender.MALE)  // 기본값 설정
+                        .address("소셜로그인")  // 기본값 설정
+                        .phone("01011111111") // 기본값 설정
+                        .birthday(LocalDate.now())
+                        .role(Role.USER)
+                        .build());
 
         return memberRepository.save(member);
     }
